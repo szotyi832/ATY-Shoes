@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nike Air Max 97 - ATY Shoes</title>
+    <link rel="stylesheet" href="kulso.css">
+    <link rel="stylesheet" href="nike.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><a href="index.html" class="nav-link2">ATY Shoes</a></div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Főoldal</a></li>
+                <li><a href="markak.html" class="nav-link">Márkák</a></li>
+                <li><a href="akciok.html" class="nav-link">Akciók</a></li>
+                <li><a href="kapcsolat.html" class="nav-link">Kapcsolat</a></li>
+                <li><a href="kosar.html" class="nav-link cart">Kosár</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="product-container">
+        <!-- Bal oldal: Képek -->
+        <div class="product-images">
+            <img src="nike.jpg" alt="Nike Air Max 97" class="main-image" id="mainImage">
+            
+            <div class="thumbnail-gallery">
+                <img src="nike.jpg" alt="Nike 1" class="thumbnail active" onclick="changeImage(this)">
+                <img src="nike2.jpg" alt="Nike 2" class="thumbnail" onclick="changeImage(this)">
+                <img src="nike3.jpg" alt="Nike 3" class="thumbnail" onclick="changeImage(this)">
+                <img src="nike4.jpg" alt="Nike 4" class="thumbnail" onclick="changeImage(this)">
+            </div>
+        </div>
+
+        <!-- Jobb oldal: Információk -->
+        <div class="product-info">
+            <h1 class="product-title">Nike Air Max 97</h1>
+            <p class="product-price">49 990 Ft</p>
+            <p class="product-description">
+                A legendás Nike Air Max 97 visszatér a klasszikus hullámvonal dizájnnal 
+                és teljes hosszúságú látható Air párnázással. A prémium anyagok és az 
+                ikonikus design tökéletes kényelmet és stílust biztosít minden nap.
+            </p>
+
+            <!-- Szín választó -->
+            <div class="color-selector">
+                <h3>Szín:</h3>
+                <div class="color-options">
+                    <div class="color-option selected" style="background-color: #000;" onclick="selectColor(this)" data-color="Fekete"></div>
+                    <div class="color-option" style="background-color: #fff; border: 2px solid #ddd;" onclick="selectColor(this)" data-color="Fehér"></div>
+                    <div class="color-option" style="background-color: #1e90ff;" onclick="selectColor(this)" data-color="Kék"></div>
+                </div>
+            </div>
+
+            <!-- Méret választó -->
+            <div class="size-selector">
+                <h3>Válassz méretet:</h3>
+                <div class="size-options">
+                    <div class="size-option unavailable" data-size="38">38</div>
+                    <div class="size-option" data-size="39" onclick="selectSize(this)">39</div>
+                    <div class="size-option" data-size="40" onclick="selectSize(this)">40</div>
+                    <div class="size-option" data-size="41" onclick="selectSize(this)">41</div>
+                    <div class="size-option" data-size="42" onclick="selectSize(this)">42</div>
+                    <div class="size-option" data-size="43" onclick="selectSize(this)">43</div>
+                    <div class="size-option" data-size="44" onclick="selectSize(this)">44</div>
+                    <div class="size-option" data-size="45" onclick="selectSize(this)">45</div>
+                </div>
+            </div>
+
+            <!-- Mennyiség -->
+            <div class="quantity-selector">
+                <h3>Mennyiség:</h3>
+                <div class="quantity-controls">
+                    <button class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                    <span class="quantity-display" id="quantity">1</span>
+                    <button class="quantity-btn" onclick="increaseQuantity()">+</button>
+                </div>
+            </div>
+
+            <!-- Gombok -->
+            <div class="action-buttons">
+                <button class="add-to-cart-btn" onclick="addToCart()">Kosárba</button>
+                <button class="wishlist-btn" onclick="addToWishlist()">♡</button>
+            </div>
+
+            <!-- Jellemzők -->
+            <div class="product-features">
+                <h3>Termék jellemzők:</h3>
+                <ul>
+                    <li>Teljes hosszúságú Air párnázás</li>
+                    <li>Prémium bőr és szintetikus anyagok</li>
+                    <li>Ikonikus hullámvonal dizájn</li>
+                    <li>Tartós gumi talp</li>
+                    <li>Klasszikus Nike minőség</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedSize = null;
+        let selectedColor = "Fekete";
+        let quantity = 1;
+
+        // Kép váltás
+        function changeImage(thumbnail) {
+            document.getElementById('mainImage').src = thumbnail.src;
+            
+            // Aktív thumbnail
+            document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+            thumbnail.classList.add('active');
+        }
+
+        // Méret választás
+        function selectSize(element) {
+            if (element.classList.contains('unavailable')) return;
+            
+            document.querySelectorAll('.size-option').forEach(s => s.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedSize = element.dataset.size;
+        }
+
+        // Szín választás
+        function selectColor(element) {
+            document.querySelectorAll('.color-option').forEach(c => c.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedColor = element.dataset.color;
+        }
+
+        // Mennyiség növelés
+        function increaseQuantity() {
+            quantity++;
+            document.getElementById('quantity').textContent = quantity;
+        }
+
+        // Mennyiség csökkentés
+        function decreaseQuantity() {
+            if (quantity > 1) {
+                quantity--;
+                document.getElementById('quantity').textContent = quantity;
+            }
+        }
+
+        // Kosárba helyezés
+        function addToCart() {
+            if (!selectedSize) {
+                alert('Kérlek válassz méretet!');
+                return;
+            }
+
+            // Értesítés
+            showNotification('Termék hozzáadva a kosárhoz!');
+            
+            // Itt tárolhatod a kosár adatokat localStorage-ban
+            const cartItem = {
+                name: 'Nike Air Max 97',
+                size: selectedSize,
+                color: selectedColor,
+                quantity: quantity,
+                price: 49990
+            };
+            
+            console.log('Kosárba került:', cartItem);
+        }
+
+        // Kedvencekhez adás
+        function addToWishlist() {
+            showNotification('Termék hozzáadva a kedvencekhez!');
+        }
+
+        // Értesítés megjelenítés
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
